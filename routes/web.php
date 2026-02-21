@@ -29,3 +29,44 @@ Route::get('/test-facade', function (UserService $userService) {
     return Response::json($userService->listUser());
 });
 
+//Excer 3
+Route::get('/post/{post}/comment/{comment}', function ($postId, $commentId) {
+    return "Post ID: $postId, Comment: $commentId";
+});
+
+Route::get('post/{id}', function ($id) {
+    return "Post ID: $id";
+})->where('id', '[0-9]+');
+
+Route::get('/search/{search}', function (string $search) {
+    return  $search;
+})->where('search', '.*');
+
+Route::get('/test/route/sample', function () {
+    return route('test-route');
+})->name('test-route');
+
+Route::middleware(['user-middleware'])->group(function () {
+    Route::get('route-middleware-group', function (Request $request) {
+        return response('first');
+    });
+
+    Route::get('route-middleware-group/second', function (Request $request) {
+        return response('second');
+    });
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users', 'index');
+    Route::post('/users/first', 'first');
+    Route::get('/users/{id}', 'get');
+});
+
+Route::get('/token', function (Request $request) {
+    return view('token');
+});
+
+Route::post('/token', function (Request $request) {
+    return $rrequest->all();
+});
+
