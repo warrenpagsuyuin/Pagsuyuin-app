@@ -5,10 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\FirstController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use App\Services\UserService;
+use App\Services\ProductService;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (Request $request) {
+    $name = $request->query('name', 'Guest');
+    return view('welcome', compact('name'));
 });
 
 Route::get('/show-first', [FirstController::class, 'show']);
@@ -70,3 +73,11 @@ Route::post('/token', function (Request $request) {
     return $rrequest->all();
 });
 
+Route::get('/users', [UserController::class, 'index'])->name('user.middleware');
+
+Route::resource('products', ProductController::class);
+
+Route::get('/product-list', function (ProductService $productService) {
+    $data['products'] = $productService->listProducts();
+    return view('Products.list', $data);
+});
