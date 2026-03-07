@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot name="heading">
-        <h1>Products List</h1>
+        <h1>Users Management</h1>
     </x-slot>
 
     <div class="container mt-5">
@@ -9,19 +9,19 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Category</th>
+                    <th>Gender</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($products as $product)
+                @forelse($users as $user)
                     <tr>
-                        <td>{{ $product['id'] }}</td>
-                        <td>{{ $product['name'] }}</td>
-                        <td>{{ $product['category'] }}</td>
+                        <td>{{ $user['id'] }}</td>
+                        <td>{{ $user['name'] }}</td>
+                        <td>{{ $user['gender'] }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3" style="text-align: center;">No products found</td>
+                        <td colspan="3" class="text-center">No users found</td>
                     </tr>
                 @endforelse
             </tbody>

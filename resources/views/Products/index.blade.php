@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+<x-layout>
+    <x-slot name="heading">    Products </x-slot>
+</x-table>
     <title>Products</title>
     <style>
         table {
@@ -60,4 +60,5 @@
     <p> Global Variable: {{ $sharedVariable }}</p>
     <p> Product Key: {{ $productKey }}</p>
 </body>
-</html>
+</x-table>
+</x-layout>

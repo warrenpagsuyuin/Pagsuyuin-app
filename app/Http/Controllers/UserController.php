@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserService $userService)
     {
-        return response()->json(['message' => 'UserController index']);
+        $users = $userService->listUser();
+        return view('user.index', ['users' => $users]);
     }
 
     public function first(UserService $userService)
@@ -18,9 +20,9 @@ class UserController extends Controller
 
     public function get(UserService $userService, $id)
     {
-      $user = collect($userService->listUser()) ->filter(function ($item) use ($id) {
+      $user = collect($userService->listUser())->filter(function ($item) use ($id) {
         return $item['id'] == $id;
-    })->first();
-     
+      })->first();
+      return $user;
     }
 }
